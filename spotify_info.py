@@ -26,5 +26,5 @@ try:
 except dbus.exceptions.DBusException, e:
 	message = 'SPOTIFY'
 
-#sys.stdout.write(message)
-print message
+sys.stdout.write(message)
+#print message
