@@ -11,6 +11,8 @@ def change(dbus_object, action):
 		'previous' : dbus_object.Previous,
 		'stop' : dbus_object.Stop,
 		'pp' : dbus_object.PlayPause,
+		'play' : dbus_object.Play,
+		'pause' : dbus_object.Pause,
 	}
 
 	if action == 'exit':
@@ -26,9 +28,7 @@ dbus_interface = 'org.mpris.MediaPlayer2.Player'
 
 try:
 	spotify = bus.get_object(bus_name, object_path)
-	iface = dbus.Interface(spotify, interface_name)
 	player = dbus.Interface(spotify, dbus_interface)
-	props = iface.Get(dbus_interface, 'Metadata')
 
 	while(True):
 		s = raw_input()
