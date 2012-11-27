@@ -2,6 +2,8 @@
 
 import sys, dbus
 
+reload(sys).setdefaultencoding('utf8')
+
 bus = dbus.SessionBus()
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
