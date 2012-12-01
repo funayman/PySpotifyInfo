@@ -11,6 +11,7 @@ dbus_interface = 'org.mpris.MediaPlayer2.Player'
 
 artist_desc = 'xesam:artist'
 title_desc = 'xesam:title'
+album_desc = 'xesam:album'
 
 try:
 	bus = dbus.SessionBus()
@@ -23,12 +24,11 @@ try:
 	if(props.has_key(artist_desc)):
 		artist = props.get(artist_desc)[0]
 	
-	if(props.has_key('xesam:title')):
-		title = props.get('xesam:title')
+	if(props.has_key(title_desc)):
+		title = props.get(title_desc)
 
 	message = '%s - %s' % (artist, title)
 except dbus.exceptions.DBusException, e:
 	message = 'SPOTIFY'
 
 sys.stdout.write(message)
-#print message
