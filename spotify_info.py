@@ -4,7 +4,6 @@ import sys, dbus
 
 reload(sys).setdefaultencoding('utf8')
 
-bus = dbus.SessionBus()
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
 interface_name = 'org.freedesktop.DBus.Properties'
@@ -14,6 +13,7 @@ artist_desc = 'xesam:artist'
 title_desc = 'xesam:title'
 
 try:
+	bus = dbus.SessionBus()
 	spotify = bus.get_object(bus_name, object_path)
 	iface = dbus.Interface(spotify, interface_name)
 	props = iface.Get(dbus_interface, 'Metadata')
