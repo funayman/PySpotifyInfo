@@ -2,7 +2,6 @@
 
 import sys, dbus, argparse
 
-bus = dbus.SessionBus()
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
 interface_name = 'org.freedesktop.DBus.Properties'
@@ -28,6 +27,7 @@ parser.add_argument("command", type=str, help="")
 args = parser.parse_args()
 
 try:
+    bus = dbus.SessionBus()
     spotify = bus.get_object(bus_name, object_path)
     player = dbus.Interface(spotify, dbus_interface)
 
