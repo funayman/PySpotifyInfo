@@ -19,8 +19,6 @@ try:
 	iface = dbus.Interface(spotify, interface_name)
 	props = iface.Get(dbus_interface, 'Metadata')
 
-	print props
-
 	if(props.has_key(artist_desc)):
 		artist = props.get(artist_desc)[0]
 	
