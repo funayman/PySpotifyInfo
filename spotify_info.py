@@ -26,7 +26,7 @@ try:
 		title = props.get(title_desc)
 
 	message = '%s - %s' % (artist, title)
-except dbus.exceptions.DBusException, e:
+except Exception, e:
 	message = 'SPOTIFY'
 
 sys.stdout.write(message)
