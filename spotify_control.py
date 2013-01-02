@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import sys, dbus, argparse
-from optparse import OptionParser
 
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
@@ -23,23 +22,25 @@ def change(dbus_object, action):
 
     actions.get(action, print_error)()
 
-parser = OptionParser()
-parser.add_option(
+parser = argparse.ArgumentParser(description="Spotify command line controller and song information displayer")
+parser.add_argument(
 		'-c',
 		'--control',
 		dest = 'change',
 		default = None,
 		choices = ['next', 'previous', 'stop', 'pp', 'play', 'pause'],
 		help = 'Options to control spotify')
-parser.add_option(
+parser.add_argument(
 		'-d',
 		'--display',
-		dest = 'change',
+		dest = 'display',
 		default = None,
+		nargs = '*',
 		choices = ['artist', 'title', 'album'],
 		help = 'What to display to stdout')
-(options, args) = parser.parse_args()
+args = parser.parse_args()
 
+print args
 try:
 	bus = dbus.SessionBus()
 	spotify = bus.get_object(bus_name, object_path)
