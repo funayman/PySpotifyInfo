@@ -7,6 +7,12 @@ object_path = '/org/mpris/MediaPlayer2'
 interface_name = 'org.freedesktop.DBus.Properties'
 dbus_interface = 'org.mpris.MediaPlayer2.Player'
 
+d_values = {
+	'artist' : 'xesam:artist',
+	'title' : 'xesam:title',
+	'album' : 'xesam:album'
+}
+
 def print_error():
     print 'Function not available'
 
@@ -38,17 +44,36 @@ parser.add_argument(
 		nargs = '+',
 		choices = ['artist', 'title', 'album'],
 		help = 'What to display to stdout')
+parser.add_argument(
+		'-m',
+		'--modifier',
+		dest = 'mod',
+		default = ' - ',
+		help = 'What character seperates in the display')
+
 args = parser.parse_args()
 
 try:
 	bus = dbus.SessionBus()
 	spotify = bus.get_object(bus_name, object_path)
 	player = dbus.Interface(spotify, dbus_interface)
+	iface = dbus.Interface(spotify, interface_name)
+	props = iface.Get(dbus_interface, 'Metadata')
 
 	if args.change:
 		change(player, args.change.lower())
+
+	if args.display:
+		spotify_display = ''
+		for d in args.display:
+			if(props.has_key(d_values[d])):
+				spotify_display += '{0}{1}'.format(props.get(d_values[d])[0] if (d == 'artist') else props.get(d_values[d]), args.mod)
+		sys.stdout.write(spotify_display[:len(spotify_display) - len(args.mod)])
+	
 except dbus.exceptions.DBusException, e:
     print e
     sys.exit(1)
+#except NameError, e:
+#	sys.stderr.write("SPOTIFY")
 
 
