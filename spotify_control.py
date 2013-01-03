@@ -49,7 +49,7 @@ parser.add_argument(
 		'--modifier',
 		dest = 'mod',
 		default = ' - ',
-		help = 'What character seperates in the display')
+		help = 'What character seperates in the display. To include spaces wrap the character in quotes')
 
 args = parser.parse_args()
 
@@ -69,6 +69,7 @@ try:
 			if(props.has_key(d_values[d])):
 				spotify_display += '{0}{1}'.format(props.get(d_values[d])[0] if (d == 'artist') else props.get(d_values[d]), args.mod)
 		sys.stdout.write(spotify_display[:len(spotify_display) - len(args.mod)])
+
 	
 except dbus.exceptions.DBusException, e:
     print e

@@ -1,9 +1,9 @@
 function spotify(){
-	echo `python ~/.scripts/spotify_info.py`
+	echo `python ~/.scripts/spotify_control.py -d artist title -m " -- "`
 }
 
-alias splay='spotify_control.py pp'
-alias spause='spotify_control.py pp'
-alias snext='spotify_control.py next'
-alias sprevious='spotify_control.py previous'
-alias sstop='spotify_control.py stop'
+alias splay='spotify_control.py -c pp'
+alias spause='spotify_control.py -c pp'
+alias snext='spotify_control.py -c next'
+alias sprevious='spotify_control.py -c previous'
+alias sstop='spotify_control.py -c stop'
