@@ -35,19 +35,18 @@ parser.add_argument(
 		'--display',
 		dest = 'display',
 		default = None,
-		nargs = '*',
+		nargs = '+',
 		choices = ['artist', 'title', 'album'],
 		help = 'What to display to stdout')
 args = parser.parse_args()
 
-print args
 try:
 	bus = dbus.SessionBus()
 	spotify = bus.get_object(bus_name, object_path)
 	player = dbus.Interface(spotify, dbus_interface)
 
-	if options.change:
-		change(player, options.change.lower())
+	if args.change:
+		change(player, args.change.lower())
 except dbus.exceptions.DBusException, e:
     print e
     sys.exit(1)
