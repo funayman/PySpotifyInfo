@@ -42,7 +42,7 @@ parser.add_argument(
 		dest = 'display',
 		default = None,
 		nargs = '+',
-		choices = ['artist', 'title', 'album'],
+		choices = d_values.keys(),
 		help = 'What to display to stdout')
 parser.add_argument(
 		'-m',
@@ -73,7 +73,7 @@ try:
 except dbus.exceptions.DBusException, e:
     print e
     sys.exit(1)
-#except NameError, e:
-#	sys.stderr.write("SPOTIFY")
+except NameError, e:
+	sys.stderr.write("SPOTIFY")
 
 
