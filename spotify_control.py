@@ -72,7 +72,7 @@ try:
 
 	
 except dbus.exceptions.DBusException, e:
-    print e
+    print "SPOTIFY"
     sys.exit(1)
 except NameError, e:
 	sys.stderr.write("SPOTIFY")
