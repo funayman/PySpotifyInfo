@@ -2,6 +2,8 @@
 
 import sys, dbus, argparse
 
+reload(sys).setdefaultencoding('utf8')
+
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
 interface_name = 'org.freedesktop.DBus.Properties'
