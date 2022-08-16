@@ -1,8 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 
 import sys, dbus, argparse
 
-reload(sys).setdefaultencoding('utf8')
+# reload(sys).setdefaultencoding('utf8')
 
 bus_name = 'org.mpris.MediaPlayer2.spotify'
 object_path = '/org/mpris/MediaPlayer2'
@@ -16,17 +16,17 @@ d_values = {
 }
 
 def print_error():
-    print 'Function not available'
+    print('Function not available')
 
 def change(dbus_object, action):
     actions = {
-            'next' : dbus_object.Next,
-            'previous' : dbus_object.Previous,
-            'stop' : dbus_object.Stop,
-            'pp' : dbus_object.PlayPause,
-            'play' : dbus_object.Play,
-            'pause' : dbus_object.Pause,
-            }
+        'next' : dbus_object.Next,
+        'previous' : dbus_object.Previous,
+        'stop' : dbus_object.Stop,
+        'pp' : dbus_object.PlayPause,
+        'play' : dbus_object.Play,
+        'pause' : dbus_object.Pause,
+    }
 
     actions.get(action, print_error)()
 
@@ -68,15 +68,14 @@ try:
 	if args.display:
 		spotify_display = ''
 		for d in args.display:
-			if(props.has_key(d_values[d])):
+			if(d_values[d] in props):
 				spotify_display += '{0}{1}'.format(props.get(d_values[d])[0] if (d == 'artist') else props.get(d_values[d]), args.mod)
 		sys.stdout.write(spotify_display[:len(spotify_display) - len(args.mod)])
 
-	
-except dbus.exceptions.DBusException, e:
-    print "SPOTIFY"
+except dbus.exceptions.DBusException as e:
+    print("SPOTIFY")
     sys.exit(1)
-except NameError, e:
+except NameError as e:
 	sys.stderr.write("SPOTIFY")
 
 
