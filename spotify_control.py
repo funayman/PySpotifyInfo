@@ -64,6 +64,7 @@ try:
 
 	if args.change:
 		change(player, args.change.lower())
+		sys.exit(0)
 
 	if args.display:
 		spotify_display = ''
@@ -71,10 +72,12 @@ try:
 			if(d_values[d] in props):
 				spotify_display += '{0}{1}'.format(props.get(d_values[d])[0] if (d == 'artist') else props.get(d_values[d]), args.mod)
 		sys.stdout.write(spotify_display[:len(spotify_display) - len(args.mod)])
+		sys.exit(0)
 
+	sys.stdout.write('SPOTIFY')
 except dbus.exceptions.DBusException as e:
-    print("SPOTIFY")
-    sys.exit(1)
+	sys.stderr.write('SPOTIFY')
+	sys.exit(1)
 except NameError as e:
 	sys.stderr.write("SPOTIFY")
 
